@@ -4,6 +4,7 @@
 # DOWNLOAD THIS FILE
 #https://system.data.sqlite.org/downloads/1.0.112.0/sqlite-netFx46-binary-x64-2015-1.0.112.0.zip
 
+# unzip the file
 # Expand-Archive -Path sqlite-netFx46-binary-x64-2015-1.0.112.0.zip -DestinationPath C:\temp
 # copy c:\temp\*dll c:\Suricata
 

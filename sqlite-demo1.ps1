@@ -19,7 +19,7 @@ Function createDataBase([string]$DBPath){
         $CMD = $CONN.CreateCommand()
         $CMD.Dispose()
         $CONN.Close()
-        Write-Output "Create database and table: Ok"
+        Write-Output "Create database: Ok"
     } Else {write-output "DB Exists: Ok"}
 }
 # ******** MAIN ********

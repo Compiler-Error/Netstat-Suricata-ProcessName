@@ -21,7 +21,7 @@ Function createDataBase([string]$DBPath){
         $CMD.Dispose()
         $CONN.Close()
         Write-Output "Create database and table: Ok"
-    } Else {Log-It "DB Exists: Ok"}
+    } Else {"DB Exists: Ok"}
 }
 # ******** MAIN ********
 $DBPath = "c:\Suricata\firstoctet.sqlite"

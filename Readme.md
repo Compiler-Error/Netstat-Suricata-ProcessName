@@ -10,8 +10,8 @@ https://www.youtube.com/watch?v=uwLBxTAIa3s&t=40s
 This series is inspired by this tweet!
 https://twitter.com/egyp7/status/9594...
 
-@egyp7 Replying to @mattifestation
-Can confirm. CCDC has taught me that it is difficult to avoid the IDS that is a human looking at netstat and Wireshark continuously
+@egyp7 
+"Can confirm. CCDC has taught me that it is difficult to avoid the IDS that is a human looking at netstat and Wireshark continuously"
 
 
 Netstat -anoob OUTPUT to sqlite using powershell Part 1

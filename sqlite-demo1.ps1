@@ -33,3 +33,7 @@ write-output "--------------------------"
 createDataBase $DBPath  # Function call
 write-output "--------------------------"
 write-output "Main END"
+
+
+# Awesome GUI for sqlite
+# https://sqlitebrowser.org/

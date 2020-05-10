@@ -2,7 +2,7 @@ This repo will document the process to pair a systems netflow data with the wind
 
 Series 1
 
-Warning, videos have no audio.  Unable to aquire license rights to wind beneath my wings, take the power back, or fade to black or anything from Mr. Osborne, so whats the point?
+Warning, videos have no audio.  Unable to aquire license rights to wind beneath my wings, take the power back, fade to black or anything from Mr. Osborne, so whats the point?
 
 Suricata IDS on Windows 10 Part 1
 https://www.youtube.com/watch?v=h0FJx-eYkxQ

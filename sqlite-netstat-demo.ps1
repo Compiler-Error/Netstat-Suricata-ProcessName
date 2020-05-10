@@ -1,4 +1,4 @@
-﻿# PowerShell SQLite DB example, muchos gracias to C. Nichols mohawke@gmail.com
+# PowerShell SQLite DB example, muchos gracias to C. Nichols mohawke@gmail.com
 # https://www.darkartistry.com/2019/08/create-insert-and-query-sqlite-with-powershell/
 
 # DOWNLOAD THIS FILE
@@ -22,6 +22,7 @@ Function createDataBase([string]$db){
         # ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, INSERT NULL to increment.
         $createTableQuery = "CREATE TABLE netstatdemo (
                                     ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                                    Timestamp         TEXT    NULL,
                                     Protocol          TEXT    NULL,
                                     LocalAddress      TEXT    NULL,
                                     ForeignAddress    TEXT    NULL,
@@ -55,14 +56,15 @@ Function insertDatabase([string]$db, [System.Collections.ArrayList]$rows) {
             #$Counter = 0
             ForEach($row in $rows) {
                 #Write-Output $row
-                $protocol = $row.Split(",")[0]  
-                $localaddress = $row.Split(",")[1]
-                $foreignaddress = $row.Split(",")[2]
-                $state = $row.Split(",")[3]
-                $procid = $row.Split(",")[4] #  *** $pid is RESERVED, 1 hour lost forever debugging****
+                $timestamp = $row.Split(",")[0]  
+                $protocol = $row.Split(",")[1]  
+                $localaddress = $row.Split(",")[2]
+                $foreignaddress = $row.Split(",")[3]
+                $state = $row.Split(",")[4]
+                $procid = $row.Split(",")[5] #  *** $pid is RESERVED, 1 hour lost forever debugging****
 
-                $sql = "INSERT INTO netstatdemo (Protocol,LocalAddress,ForeignAddress,State,PID) "
-                $sql += "VALUES($protocol,$localaddress,$foreignaddress,$state,$procid);"
+                $sql = "INSERT INTO netstatdemo (Timestamp,Protocol,LocalAddress,ForeignAddress,State,PID) "
+                $sql += "VALUES($timestamp,$protocol,$localaddress,$foreignaddress,$state,$procid);"
                 #Write-Output $sql
  
                 $CMD.CommandText = $sql
@@ -87,21 +89,24 @@ write-output ""
 write-output ""
 write-output "Main"
 write-output "--------------------------"
-$DBPath = "c:\Suricata\firstoctet3.sqlite"
+$DBPath = "c:\Suricata\firstoctet4.sqlite"
 write-output "calling createDatabase"
-write-output "--------------------------"
 createDataBase $DBPath  # Function call
 
 #---------------------------------------------------------
+write-output "calling netstat -ano"
 $netstat_ano = netstat -ano
-$datatmp = $netstat_ano | ConvertFrom-String -PropertyName null, Protocol, LocalAddress, ForeignAddress, State, PID | 
-Select-Object -First 1000 -Property Protocol, LocalAddress, ForeignAddress, State, PID  |  where PID -ne $null | 
-ConvertTo-Csv 
+$datatmp = $netstat_ano | ConvertFrom-String -PropertyName null, Protocol, 
+LocalAddress, ForeignAddress, State, PID | 
+Select-Object -First 1000 -Property @{Name='timestamp';Expression={Get-Date -Format o}}, 
+Protocol, LocalAddress, ForeignAddress, State, PID  |  where PID -ne $null | 
+ConvertTo-Csv
+#$datatmp
 
 #throw away the headers
 $tmpheader1, $tmpheader2, $tmpheader3, $data = $datatmp 
+write-output "calling insertDatabase"
 insertDatabase $DBPath $data
-
 write-output "--------------------------"
 write-output "Main END"
 

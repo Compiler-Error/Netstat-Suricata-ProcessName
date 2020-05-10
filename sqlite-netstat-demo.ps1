@@ -10,6 +10,9 @@
 
 # Unblock-File -Path c:\Suricata\System.Data.SQLite.dll
 
+# Awesome GUI for sqlite
+# https://sqlitebrowser.org/
+
 cls
 ##rm c:\Suricata\firstoctet2.sqlite
 Add-Type -Path "c:\Suricata\System.Data.SQLite.dll" 
